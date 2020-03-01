@@ -4,7 +4,7 @@ import {Menubar} from 'primereact/menubar';
 import {Button} from 'primereact/button';
 import {DataTable} from 'primereact/datatable';
 
-
+import Domains from './Domains'
 
 function App() {
   return (
@@ -17,6 +17,11 @@ function App() {
             </p>
         </a>
       </div>
+        <div className="container">
+            <Domains/>
+        </div>
+
+
     </div>
   );
 }
