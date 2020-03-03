@@ -19,11 +19,10 @@ export default class Domains extends Component {
     render() {
         return (
             <DataTable value={this.state.domains}>
-                <Column field="ID" header="#" />
+                <Column field="ID" header="#" style={{width:'50px'}}/>
                 <Column field="Name" header="Domain" />
-                <Column field="HTTPCodeLast" header="Code" />
-                <Column field="HTTPLatencyLast" header="Latency" />
-                <Column field="HTTPUpdatedLast" header="Last Update" />
+                <Column field="HTTPCodeLast" header="Code" style={{width:'60px'}}/>
+                <Column field="HTTPLatencyLast" header="Latency (ms)" style={{width:'130px'}}/>
             </DataTable>
         );
     }

@@ -23,3 +23,7 @@ body {
 .container {
     padding: 15px 10px;
 }
+
+.container-bar {
+    margin-bottom: 10px;
+}
