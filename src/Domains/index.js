@@ -2,18 +2,17 @@ import React, { Component } from 'react';
 import './Domains.css';
 import {DataTable} from 'primereact/datatable';
 import {Column} from "primereact/column";
-import DomainModel from './model'
+
 
 export default class Domains extends Component {
 
-    constructor(prop) {
-        super(prop);
+    constructor(props) {
+        super(props);
         this.state = {};
-        this.model = new DomainModel();
     }
 
     componentDidMount() {
-        this.model.getAllDomains().then(r => this.setState({domains:r})).catch(err => console.error(err))
+        this.props.model.getAllDomains().then(r => this.setState({domains:r})).catch(err => console.error(err))
     }
 
     render() {

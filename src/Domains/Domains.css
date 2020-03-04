@@ -6,3 +6,19 @@
     padding: 4px 0;
     margin: 0;
 }
+
+.fieldset .err {
+    color: #a80000;
+    display: block;
+    margin: 2px 0 0 2px;
+    font-size: 0.9em;
+}
+
+.errormsg {
+    background-color: #f8b7bd;
+    border: 0 none;
+    color: #212121;
+    padding: 0.429em;
+    margin: 0;
+    border-radius: 3px;
+}

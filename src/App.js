@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import {Button} from 'primereact/button';
+import DomainModel from './Domains/model'
 
 
 import Domains from './Domains'
@@ -10,6 +11,7 @@ export default class App extends Component {
 
     constructor(props) {
         super(props);
+        this.domainModel = new DomainModel();
 
         this.state = {
             addDomainVisible: false
@@ -35,12 +37,13 @@ export default class App extends Component {
                     <div className="container-bar">
                         <Button label="Add new domain" onClick={this.showAddDialog.bind(this)}/>
                     </div>
-                    <Domains/>
+                    <Domains model={this.domainModel}/>
                 </div>
 
 
                 <AddDomainDialog
                     visible={this.state.addDomainVisible}
+                    onAdd={this.domainModel.addDomain}
                     onHide={() => this.setState({addDomainVisible:false})}
                 />
             </div>
