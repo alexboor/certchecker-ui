@@ -22,6 +22,10 @@ export default class App extends Component {
         this.setState({ addDomainVisible:true });
     }
 
+    update() {
+
+    }
+
     render() {
         return (
             <div className="app">
@@ -37,14 +41,17 @@ export default class App extends Component {
                     <div className="container-bar">
                         <Button label="Add new domain" onClick={this.showAddDialog.bind(this)}/>
                     </div>
-                    <Domains model={this.domainModel}/>
+                    <Domains model={this.domainModel} />
                 </div>
 
 
                 <AddDomainDialog
                     visible={this.state.addDomainVisible}
                     onAdd={this.domainModel.addDomain}
-                    onHide={() => this.setState({addDomainVisible:false})}
+                    onHide={() => {
+                        this.setState({addDomainVisible:false})
+
+                    }}
                 />
             </div>
         );

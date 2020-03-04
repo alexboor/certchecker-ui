@@ -36,7 +36,7 @@ export default class AddDomainDialog extends Component {
                 domain_check_time: this.state.domain_time
             }).then(r => {
                 if (r.ok) {
-                    console.log("OK", r)
+                    this.props.onHide()
                 }
                 throw new Error(r.message)
             }).catch(r => {
