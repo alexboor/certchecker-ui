@@ -12,7 +12,18 @@ export default class Domains extends Component {
     }
 
     componentDidMount() {
-        this.props.model.getAllDomains().then(r => this.setState({domains:r})).catch(err => console.error(err))
+        this.props.model.getAllDomains().then(r => this.setState({domains:this.parseDomains(r)})).catch(err => console.error(err))
+    }
+
+    parseDomains(domains) {
+        return domains.map(i => {
+            return {
+                ID: i.ID,
+                Name: i.Name,
+                HTTPCodeLast: (i.HTTPCodeLast.Valid) ? i.HTTPCodeLast.Int32 : '-',
+                HTTPLatencyLast: (i.HTTPLatencyLast.Valid) ? i.HTTPLatencyLast.Int32 : '-'
+            }
+        });
     }
 
     render() {
