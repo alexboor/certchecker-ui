@@ -32,6 +32,8 @@ class DomainProvider extends Component {
 
     addDomain = data => this.domainModel.addDomain(data);
 
+    removeDomain = id => this.domainModel.removeDomain(id);
+
     render() {
         const { children } = this.props;
         const { domains } = this.state;
@@ -41,7 +43,8 @@ class DomainProvider extends Component {
                 value={{
                     domains,
                     updateDomainList: this.updateDomainList,
-                    addDomain: this.addDomain
+                    addDomain: this.addDomain,
+                    removeDomain: this.removeDomain,
                 }}
             >
                 {children}

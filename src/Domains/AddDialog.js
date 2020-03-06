@@ -43,8 +43,8 @@ export default class AddDomainDialog extends Component {
                     this.props.onHide();
                 }
                 throw new Error(r.message)
-            }).catch(r => {
-                this.setState({ error:r.message })
+            }).catch(err => {
+                this.setState({ error:err.message })
             })
         }
     }
