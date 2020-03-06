@@ -3,11 +3,13 @@ import './Domains.css';
 import {Dialog} from "primereact/dialog";
 import {InputText} from 'primereact/inputtext';
 import {Button} from 'primereact/button';
-import {Message} from 'primereact/message'
 import * as classnames from "classnames";
+
+import DomainContext from "../DomainsContext";
 
 
 export default class AddDomainDialog extends Component {
+    static contextType = DomainContext;
 
     constructor(props) {
         super(props);
@@ -24,19 +26,21 @@ export default class AddDomainDialog extends Component {
     add() {
         this.setState({error:''});
 
+        // eslint-disable-next-line
         if (/(?=^.{1,254}$)(^(?:(?!\d+\.|-)[a-zA-Z0-9_\-]{1,63}(?<!-)\.?)+(?:[a-zA-Z]{2,})$)/.test(this.state.name) === false) {
             this.setState({ nameError: 'Value not valid' });
         } else {
             this.setState({ nameError: '' });
 
-            this.props.onAdd({
+            this.context.addDomain({
                 name: this.state.name,
                 http_check_time: this.state.http_time,
                 tls_check_time: this.state.tls_time,
                 domain_check_time: this.state.domain_time
             }).then(r => {
                 if (r.ok) {
-                    this.props.onHide()
+                    this.context.updateDomainList();
+                    this.props.onHide();
                 }
                 throw new Error(r.message)
             }).catch(r => {
