@@ -6,6 +6,7 @@ import {Button} from "primereact/button";
 
 import DomainContext from "../DomainsContext";
 import AddDomainDialog from "./AddDialog";
+import {navigate} from 'hookrouter';
 
 /**
  * Domains class
@@ -63,13 +64,17 @@ export default class Domains extends Component {
                 <div className="container-bar">
                     <Button label="Add new domain" onClick={() => this.setState({showAddDialog:true})}/>
                 </div>
-                <DataTable value={domains}>
+
+                <DataTable value={domains}
+                           selectionMode="single"
+                           onSelectionChange={e => navigate(`/domain/${e.value.ID}`)} >
                     <Column field="ID" header="#" style={{width:'50px'}}/>
                     <Column field="Name" header="Domain" />
                     <Column field="HTTPCodeLast" header="Code" style={{width:'60px'}}/>
                     <Column field="HTTPLatencyLast" header="Latency (ms)" style={{width:'130px'}}/>
                     <Column body={this.actionsCol.bind(this)} style={{textAlign:'right', width: '60px'}}/>
                 </DataTable>
+
                 <AddDomainDialog
                     visible={this.state.showAddDialog}
                     onHide={() => this.setState({showAddDialog:false})}
