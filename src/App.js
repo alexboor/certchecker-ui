@@ -4,6 +4,7 @@ import './App.css';
 import { DomainProvider } from "./DomainsContext";
 
 import Domains from './Domains'
+import NotFound from "./NotFound";
 
 import {useRoutes} from 'hookrouter';
 
@@ -33,7 +34,7 @@ const App = () => {
                 </div>
 
                 <div className="container">
-                    {router}
+                    { router || <NotFound/> }
                 </div>
 
             </div>
