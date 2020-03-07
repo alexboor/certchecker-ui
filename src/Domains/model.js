@@ -1,8 +1,17 @@
 const HOST = 'http://localhost:8888';
 const BASE_URL = '/v1/domains';
 
+/**
+ * DomainModel class
+ * Domain model contain methods to interact with back-end api
+ */
 export default class DomainModel {
 
+    /**
+     * getAllDomains
+     * Return domains list
+     * @returns {Promise<Response>}
+     */
     getAllDomains() {
         return fetch(`${HOST}${BASE_URL}`, {
             method: 'GET',
@@ -15,6 +24,12 @@ export default class DomainModel {
         })
     }
 
+    /**
+     * addDomain
+     * Add new domain to back-end
+     * @param data {object} Domains data attributes
+     * @returns {Promise<unknown>}
+     */
     addDomain(data) {
         return  new Promise((resolve,reject) => {
             fetch(`${HOST}${BASE_URL}`, {
@@ -28,6 +43,12 @@ export default class DomainModel {
         })
     };
 
+    /**
+     * removeDomain
+     * Remove domain in back-end
+     * @param id {numeric} ID of domain will be deleted
+     * @returns {Promise<unknown>}
+     */
     removeDomain(id) {
         return new Promise((resolve, reject) => {
             fetch(`${HOST}${BASE_URL}/${id}`, {

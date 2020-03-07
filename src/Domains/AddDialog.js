@@ -7,22 +7,29 @@ import * as classnames from "classnames";
 
 import DomainContext from "../DomainsContext";
 
-
+/**
+ * AddDomainDialog class
+ * Add domain dialog component
+ */
 export default class AddDomainDialog extends Component {
     static contextType = DomainContext;
 
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
-            nameError: '',
-            error: '',
-            http_time: 5,
-            domain_time: 86400,
-            tls_time: 86400
+            name: '',                   // domain fqdn name
+            nameError: '',              // error or '' on name input
+            error: '',                  // general error on form (response from back-end)
+            http_time: 5,               // time interval for http checker
+            domain_time: 86400,         // time interval for domain name checker
+            tls_time: 86400             // time interval for TLS certificate checker
         };
     }
 
+    /**
+     * add
+     * EVENT on press OK button on the form
+     */
     add() {
         this.setState({error:''});
 
@@ -49,7 +56,10 @@ export default class AddDomainDialog extends Component {
         }
     }
 
-
+    /**
+     * render
+     * @returns {*}
+     */
     render() {
         const footer = (
             <>

@@ -9,25 +9,31 @@ import { DomainProvider } from "./DomainsContext";
 import Domains from './Domains'
 import AddDomainDialog from "./Domains/AddDialog";
 
+/**
+ * App class
+ * Application bootstrap class
+ * Contains router and context providers
+ */
 export default class App extends Component {
 
     constructor(props) {
         super(props);
-        // this.domainModel = new DomainModel();
 
         this.state = {
-            addDomainVisible: false
+            addDomainVisible: false         // true = shows the Add domain dialog window
         }
     }
 
-    showAddDialog(e) {
-        this.setState({ addDomainVisible:true });
-    }
+    /**
+     * showAddDialog
+     * shows AddDomain dialog
+     */
+    showAddDialog = () => this.setState({ addDomainVisible:true });
 
-    update() {
-
-    }
-
+    /**
+     * render
+     * @returns {*}
+     */
     render() {
         return (
             <DomainProvider>
@@ -47,13 +53,9 @@ export default class App extends Component {
                     <Domains model={this.domainModel} />
                 </div>
 
-
                 <AddDomainDialog
                     visible={this.state.addDomainVisible}
-                    onHide={() => {
-                        this.setState({addDomainVisible:false})
-
-                    }}
+                    onHide={() => this.setState({addDomainVisible:false})}
                 />
             </div>
             </DomainProvider>
