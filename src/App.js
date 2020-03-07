@@ -1,42 +1,27 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './App.css';
-import {Button} from 'primereact/button';
-
 
 import { DomainProvider } from "./DomainsContext";
 
-
 import Domains from './Domains'
-import AddDomainDialog from "./Domains/AddDialog";
+
+import {useRoutes} from 'hookrouter';
+
+const routes = {
+    '/': () => <Domains />,
+    '/dashboard': () => <h1>Dashboard</h1>
+};
 
 /**
  * App class
  * Application bootstrap class
  * Contains router and context providers
  */
-export default class App extends Component {
+const App = () => {
+    const router = useRoutes(routes);
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            addDomainVisible: false         // true = shows the Add domain dialog window
-        }
-    }
-
-    /**
-     * showAddDialog
-     * shows AddDomain dialog
-     */
-    showAddDialog = () => this.setState({ addDomainVisible:true });
-
-    /**
-     * render
-     * @returns {*}
-     */
-    render() {
-        return (
-            <DomainProvider>
+    return (
+        <DomainProvider>
             <div className="app">
                 <div className="menu">
                     <a href="/">
@@ -46,21 +31,14 @@ export default class App extends Component {
                         </p>
                     </a>
                 </div>
+
                 <div className="container">
-                    <div className="container-bar">
-                        <Button label="Add new domain" onClick={this.showAddDialog.bind(this)}/>
-                    </div>
-                    <Domains model={this.domainModel} />
+                    {router}
                 </div>
 
-                <AddDomainDialog
-                    visible={this.state.addDomainVisible}
-                    onHide={() => this.setState({addDomainVisible:false})}
-                />
             </div>
-            </DomainProvider>
-        );
-    }
-}
+        </DomainProvider>
+    )
+};
 
-
+export default App;

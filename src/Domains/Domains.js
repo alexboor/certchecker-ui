@@ -5,6 +5,7 @@ import {Column} from "primereact/column";
 import {Button} from "primereact/button";
 
 import DomainContext from "../DomainsContext";
+import AddDomainDialog from "./AddDialog";
 
 /**
  * Domains class
@@ -15,7 +16,9 @@ export default class Domains extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            showAddDialog: false
+        };
     }
 
     componentDidMount() {
@@ -56,14 +59,22 @@ export default class Domains extends Component {
     render() {
         const { domains } = this.context;
 
-        return (
-            <DataTable value={domains}>
-                <Column field="ID" header="#" style={{width:'50px'}}/>
-                <Column field="Name" header="Domain" />
-                <Column field="HTTPCodeLast" header="Code" style={{width:'60px'}}/>
-                <Column field="HTTPLatencyLast" header="Latency (ms)" style={{width:'130px'}}/>
-                <Column body={this.actionsCol.bind(this)} style={{textAlign:'right', width: '60px'}}/>
-            </DataTable>
+        return (<>
+                <div className="container-bar">
+                    <Button label="Add new domain" onClick={() => this.setState({showAddDialog:true})}/>
+                </div>
+                <DataTable value={domains}>
+                    <Column field="ID" header="#" style={{width:'50px'}}/>
+                    <Column field="Name" header="Domain" />
+                    <Column field="HTTPCodeLast" header="Code" style={{width:'60px'}}/>
+                    <Column field="HTTPLatencyLast" header="Latency (ms)" style={{width:'130px'}}/>
+                    <Column body={this.actionsCol.bind(this)} style={{textAlign:'right', width: '60px'}}/>
+                </DataTable>
+                <AddDomainDialog
+                    visible={this.state.showAddDialog}
+                    onHide={() => this.setState({showAddDialog:false})}
+                />
+            </>
         );
     }
 }
