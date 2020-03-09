@@ -25,6 +25,24 @@ export default class DomainModel {
     }
 
     /**
+     * getByID
+     * Return domain object by ID
+     * @param id {numeric} Domain ID
+     * @returns {Promise<Response>}
+     */
+    getByID(id) {
+        return fetch(`${HOST}${BASE_URL}/${id}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+        }).then(r => {
+            if (r.ok) return r.json()
+        })
+    }
+
+    /**
      * addDomain
      * Add new domain to back-end
      * @param data {object} Domains data attributes

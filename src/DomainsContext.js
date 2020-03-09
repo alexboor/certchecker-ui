@@ -18,6 +18,9 @@ class DomainProvider extends Component {
         domains: [],
     };
 
+    getDomain = id => this.domainModel.getByID(id)
+        .then(r => this.parseDomain(r))
+
     /**
      * updateDomainList
      * Get domain list from back-end
@@ -26,6 +29,16 @@ class DomainProvider extends Component {
     updateDomainList = () => this.domainModel.getAllDomains()
         .then(r => this.setState({domains:this.parseDomains(r)}))
         .catch(err => console.error(err));
+
+
+    parseDomain = (d) => {
+        return {
+            ...d,
+            HTTPUpdatedLast: (d.HTTPUpdatedLast.Valid) ? d.HTTPUpdatedLast.Time : null,
+            HTTPCodeLast: (d.HTTPCodeLast.Valid) ? d.HTTPCodeLast.Int32 : '-',
+            HTTPLatencyLast: (d.HTTPLatencyLast.Valid) ? d.HTTPLatencyLast.Int32 : '-'
+        }
+    };
 
     /**
      * parseDomains
@@ -44,6 +57,8 @@ class DomainProvider extends Component {
             }
         });
     };
+
+
 
     /**
      * addDomain
@@ -74,6 +89,7 @@ class DomainProvider extends Component {
                 value={{
                     domains,
                     updateDomainList: this.updateDomainList,
+                    getDomain: this.getDomain,
                     addDomain: this.addDomain,
                     removeDomain: this.removeDomain,
                 }}

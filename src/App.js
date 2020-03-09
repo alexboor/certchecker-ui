@@ -3,14 +3,15 @@ import './App.css';
 
 import { DomainProvider } from "./DomainsContext";
 
-import Domains from './Domains'
+import Domains from './Domains';
+import Domain from './Domain';
 import NotFound from "./NotFound";
 
 import {useRoutes} from 'hookrouter';
 
 const routes = {
     '/': () => <Domains />,
-    '/dashboard': () => <h1>Dashboard</h1>
+    '/domain/:id': ({id}) => <Domain id={id} />
 };
 
 /**
