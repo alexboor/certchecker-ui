@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 import {navigate} from 'hookrouter';
 import DomainContext from "../DomainsContext";
 import {Button} from "primereact/button";
+import {Panel} from "primereact/panel";
+import LatencyChart from "./latency";
+
+import './style.css';
 
 /**
  * Domain component
@@ -48,10 +52,34 @@ const Buttons = (props) => {
 };
 
 const DomainContainer = props => {
-    console.log(props.domain)
     return (
         <div>
             <h1>{props.domain.Name}</h1>
+
+            <div className="p-grid p-align-stretch vertical-container">
+                <div className="p-col">
+                    <Panel header="HTTP Check">
+                        <p><strong>Status: </strong> <div className="badge ok">HTTP/{props.domain.HTTPCodeLast}</div></p>
+                        <p><strong>Latency: </strong>{props.domain.HTTPLatencyLast}ms</p>
+                        <p><strong>Last check: </strong>{props.domain.HTTPUpdatedLast}</p>
+                    </Panel>
+                </div>
+                <div className="p-col">
+                    <Panel header="FQDN Check">
+
+                    </Panel>
+                </div>
+                <div className="p-col">
+                    <Panel header="TLS Check">
+
+                    </Panel>
+                </div>
+            </div>
+
+            <Panel header="Latency chart">
+                <LatencyChart id={props.domain.ID}/>
+            </Panel>
+
         </div>
     )
 };

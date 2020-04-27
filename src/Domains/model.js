@@ -78,4 +78,17 @@ export default class DomainModel {
             }).then(r => resolve(r)).catch(err => reject(err))
         })
     }
+
+    getLatencySeries(domain,start, end, interval) {
+        return new Promise((resolve,reject) => {
+            fetch(`${HOST}${BASE_URL}/${domain}/latency?int=${interval}&start=${start}&end=${end}`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }).then(r => resolve(r)).catch(err => reject(err))
+        })
+    }
+
 }

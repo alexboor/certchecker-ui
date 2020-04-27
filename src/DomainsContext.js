@@ -58,8 +58,6 @@ class DomainProvider extends Component {
         });
     };
 
-
-
     /**
      * addDomain
      * Add new Domain entity to back-end
@@ -75,6 +73,8 @@ class DomainProvider extends Component {
      * @returns {Promise<unknown>}
      */
     removeDomain = id => this.domainModel.removeDomain(id);
+
+    getLatencySeries = (d, s, e, i) => this.domainModel.getLatencySeries(d, s, e, i);
 
     /**
      * render
@@ -92,6 +92,7 @@ class DomainProvider extends Component {
                     getDomain: this.getDomain,
                     addDomain: this.addDomain,
                     removeDomain: this.removeDomain,
+                    getLatencySeries: this.getLatencySeries
                 }}
             >
                 {children}
